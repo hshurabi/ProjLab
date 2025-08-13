@@ -13,7 +13,7 @@ It’s designed for developers, data scientists, and researchers who often switc
 - 🛠 **Environment management**:
   - Create a new Conda environment from scratch
   - Or build it from an existing `environment.yml`
-- 🔑 Reads your GitHub **Personal Access Token (PAT)** from a `README.txt` in your projects root (in your local machine"
+- 🔑 Reads your GitHub **Personal Access Token (PAT)** from a `README.txt` in your projects root (on your local machine)
 - 📌 Keeps your projects organized under "PROJECT_ROOT" by category (`tmp`, `poc`, `prod`)
 
 ---
