@@ -1,4 +1,4 @@
-name: projectgen
+name: ProjLab
 channels:
   - defaults
 dependencies:
