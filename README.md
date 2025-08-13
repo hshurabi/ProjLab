@@ -7,14 +7,14 @@ It’s designed for developers, data scientists, and researchers who often switc
 
 ## ✨ Features
 
-- 📂 **Automatic folder structure** ("data/", "results/", "notebooks/", "related-files/", and optional "repo/")
-- 📓 Copies a starter Jupyter notebook into the "notebooks/" folder
+- 📂 **Automatic folder structure** (`data/`, `results/`, `notebooks/`, `related-files/`, and optional `repo/`)
+- 📓 Copies a starter Jupyter notebook into the `notebooks/` folder
 - 🔗 Option to **clone an existing GitHub repo** or **create a new one**
 - 🛠 **Environment management**:
   - Create a new Conda environment from scratch
-  - Or build it from an existing "environment.yml"
-- 🔑 Reads your GitHub **Personal Access Token (PAT)** from a "README.txt" in your projects root (in your local machine"
-- 📌 Keeps your projects organized under "PROJECT_ROOT" by category ("tmp", "poc", "prod")
+  - Or build it from an existing `environment.yml`
+- 🔑 Reads your GitHub **Personal Access Token (PAT)** from a `README.txt` in your projects root (in your local machine"
+- 📌 Keeps your projects organized under "PROJECT_ROOT" by category (`tmp`, `poc`, `prod`)
 
 ---
 
@@ -50,9 +50,9 @@ It’s designed for developers, data scientists, and researchers who often switc
    pip install -r requirements.txt
    ```
 
-   *(If no "requirements.txt" exists yet, manually install "PyGithub" and "questionary")*
+   *(If no `requirements.txt` exists yet, manually install `PyGithub` and `questionary`)*
 
-5. **Store your GitHub PAT** in a "README.txt" located in your projects root (one level above "projectgen/"):
+5. **Store your GitHub PAT** in a `README.txt` located in your projects root (one level above `projectgen/`):
 
    ```
    Current Github PAT: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -73,6 +73,7 @@ PROJECT_ROOT/
         ├── results/
         ├── notebooks/
         │   └── get_started.ipynb
+        ├── related-files/
         └── repo/         # cloned GitHub repo (if chosen)
 ```
 
@@ -127,7 +128,7 @@ You will be prompted for:
 ## 📌 Tips
 
 * Use `tmp` for scratch or throwaway work
-* Keep `.gitignore` updated to exclude large files in `data/` and `results/`
+* Store Data files in `data/`, write the results to `results/`, and store related-files (e.g., papers and presentations) in `related-files/` to avoid commiting them to git.
 * Run `conda env export --no-builds > environment.yml` inside a project to save its dependencies for reproducibility
 
 ---
@@ -136,11 +137,3 @@ You will be prompted for:
 
 MIT License — You are free to use and modify this tool.
 
----
-
-```
-
----
-
-If you want, I can also make a **`requirements.txt`** from your current `projectgen` environment so new users can install everything in one command. That way, setup will be even smoother. Would you like me to prepare that?
-```
