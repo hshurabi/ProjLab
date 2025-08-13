@@ -35,6 +35,7 @@ def create_structure(project_name, project_type):
     os.makedirs(os.path.join(project_path, "data"), exist_ok=True)
     os.makedirs(os.path.join(project_path, "results"), exist_ok=True)
     os.makedirs(os.path.join(project_path, "notebooks"), exist_ok=True)
+    os.makedirs(os.path.join(project_path, "related-files"), exist_ok=True)
 
 
     # Copy sample data and notebook template
