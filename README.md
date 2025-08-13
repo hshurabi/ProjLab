@@ -1,6 +1,6 @@
-# projectgen
+# ProjLab
 
-**projectgen** is a Python-based command-line tool for quickly scaffolding new projects with a consistent structure, optional GitHub integration, and Conda environment setup.  
+**ProjLab** is a Python-based command-line tool for quickly scaffolding new projects with a consistent structure, optional GitHub integration, and Conda environment setup.  
 It’s designed for developers, data scientists, and researchers who often switch between **temporary**, **proof-of-concept (PoC)**, and **production** projects.
 
 ---
@@ -33,15 +33,15 @@ It’s designed for developers, data scientists, and researchers who often switc
 
 1. **Clone this repo** (or download):
 ```bash
-   git clone https://github.com/<your-username>/projectgen.git
-   cd projectgen
+   git clone https://github.com/<your-username>/ProjLab.git
+   cd ProjLab
 ```
 
 3. **Create and activate a Conda environment**:
 
    ```bash
-   conda create -n projectgen python=3.11
-   conda activate projectgen
+   conda create -n ProjLab python=3.11
+   conda activate ProjLab
    ```
 
 4. **Install dependencies**:
@@ -52,7 +52,7 @@ It’s designed for developers, data scientists, and researchers who often switc
 
    *(If no `requirements.txt` exists yet, manually install `PyGithub` and `questionary`)*
 
-5. **Store your GitHub PAT** in a `README.txt` located in your projects root (one level above `projectgen/`):
+5. **Store your GitHub PAT** in a `README.txt` located in your projects root (one level above `ProjLab/`):
 
    ```
    Current Github PAT: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -63,7 +63,7 @@ It’s designed for developers, data scientists, and researchers who often switc
 
 ## 📁 Folder Structure
 
-When you create a project, `projectgen` will make:
+When you create a project, `ProjLab` will make:
 
 ```
 PROJECT_ROOT/
@@ -84,7 +84,7 @@ PROJECT_ROOT/
 Run the tool:
 
 ```bash
-conda activate projectgen
+conda activate ProjLab
 python new_project.py
 ```
 
