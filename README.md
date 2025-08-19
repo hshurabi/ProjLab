@@ -1,3 +1,10 @@
+# ProjLab
+
+**ProjLab** is a Python-based command-line tool for quickly scaffolding new projects with a consistent structure, optional GitHub integration, and Conda environment setup.  
+It’s designed for developers, data scientists, and researchers who often switch between **temporary**, **proof-of-concept (PoC)**, and **production** projects.
+
+---
+
 ## ✨ Features
 
 - 📂 **Automatic folder structure** (`data/`, `results/`, `notebooks/`, `related-files/`, and optional `repo/`)
