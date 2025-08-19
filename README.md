@@ -37,22 +37,14 @@ It’s designed for developers, data scientists, and researchers who often switc
    cd ProjLab
 ```
 
-3. **Create and activate a Conda environment**:
+3. **Create and activate a Conda environment from already provided yml file**:
 
    ```bash
-   conda create -n ProjLab python=3.11
+   conda create create -f ProjLab.yml
    conda activate ProjLab
    ```
 
-4. **Install dependencies**:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-   *(If no `requirements.txt` exists yet, manually install `PyGithub` and `questionary`)*
-
-5. **Store your GitHub Username and PAT** in a `.env` file located in the `ProjLab` directory:
+4. **Store your GitHub Username and PAT** in a `.env` file located in the `ProjLab` directory (Note: .env will not be synced to your repo.):
 
    ```
    GITHUB_USERNAME=your_github_username
@@ -106,7 +98,7 @@ You will be prompted for:
 ## 🔐 Security
 
 * Your GitHub PAT and username are **never stored in the script** — they are read from the `.env` file in the root of your projects folder.
-* Make sure this file is **not committed to Git** by adding `.env` to `.gitignore`.
+* Make sure this file is **not committed to Git** by adding `.env` to `.gitignore` (already added).
 
 ---
 
