@@ -118,7 +118,7 @@ You can configure your Conda environment so that when you activate it, your shel
    ```
 4. For Windows users, you may need to make another file named `auto_cd.ps1` in the same folder  with the following content:
    ```ps1
-   Set-Location -Path 'C:\Users\hamed\OneDrive\projects\ProjLab'
+   Set-Location -Path 'PATH/TO/YOUR/ProjLab'
    ```
 
 Now, every time you run `conda activate ProjLab`, your shell will automatically change to your project directory. Next time just activate ProjLab and run 
