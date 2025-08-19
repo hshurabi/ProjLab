@@ -52,11 +52,11 @@ It’s designed for developers, data scientists, and researchers who often switc
 
    *(If no `requirements.txt` exists yet, manually install `PyGithub` and `questionary`)*
 
-5. **Store your GitHub PAT** in a `README.txt` located in your projects root (one level above `ProjLab/`):
+5. **Store your GitHub Username and PAT** in a `.env` file located in the `ProjLab` directory:
 
    ```
-   Current Github PAT: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-       expires on YYYY/MM/DD
+   GITHUB_USERNAME=your_github_username
+   GITHUB_PAT_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
    ```
 
 ---
@@ -85,7 +85,7 @@ Run the tool:
 
 ```bash
 conda activate ProjLab
-python new_project.py
+python init_proj.py
 ```
 
 You will be prompted for:
@@ -105,8 +105,8 @@ You will be prompted for:
 
 ## 🔐 Security
 
-* Your GitHub PAT is **never stored in the script** — it’s read from `README.txt` in the root of your projects folder.
-* Make sure this file is **not committed to Git** by adding it to `.gitignore`.
+* Your GitHub PAT and username are **never stored in the script** — they are read from the `.env` file in the root of your projects folder.
+* Make sure this file is **not committed to Git** by adding `.env` to `.gitignore`.
 
 ---
 

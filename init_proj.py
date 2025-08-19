@@ -1,28 +1,15 @@
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 import questionary
 from github import Github
 import shutil
 import subprocess
 
-def load_github_token_from_readme():
-    projects_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # one level up
-    readme_path = os.path.join(projects_root, "README.txt")
+load_dotenv()
 
-    if not os.path.exists(readme_path):
-        raise FileNotFoundError(f"README.txt not found in {projects_root}")
-
-    with open(readme_path, "r") as f:
-        for line in f:
-            if "Current Github PAT:" in line:
-                token = line.strip().split("Current Github PAT:")[1].strip().split()[0]
-                return token
-
-    raise ValueError("GitHub token not found in README.txt")
-
-# Set your GitHub username and token
-GITHUB_USERNAME = "hshurabi"
-GITHUB_TOKEN = load_github_token_from_readme()
+GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
+GITHUB_PAT_TOKEN = os.getenv("GITHUB_PAT_TOKEN")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
@@ -48,7 +35,7 @@ def create_structure(project_name, project_type):
     return project_path
 
 def create_github_repo(repo_name):
-    g = Github(GITHUB_TOKEN)
+    g = Github(GITHUB_PAT_TOKEN)
     user = g.get_user()
     try:
         repo = user.get_repo(repo_name)
