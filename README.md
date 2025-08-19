@@ -10,7 +10,7 @@ You can configure your Conda environment so that when you activate it, your shel
    ```
    Look for the path next to your environment name (e.g., `ProjLab`).
 
-2. Create a folder named `activate.d` inside your environment's `etc\conda` directory:
+2. Create a folder named `activate.d` inside your environment's `ProjLab\etc\conda` directory:
    ```powershell
    mkdir "<env_path>\etc\conda\activate.d"
    ```
@@ -18,6 +18,10 @@ You can configure your Conda environment so that when you activate it, your shel
 3. Create a file named `auto_cd.bat` in that folder with the following content:
    ```bat
    cd /d <PATH/TO/YOUR/ProjLab>
+   ```
+4. For Windows users, you may need to make another file named `auto_cd.ps1` in the same folder  with the following content:
+   ```ps1
+   Set-Location -Path 'C:\Users\hamed\OneDrive\projects\ProjLab'
    ```
 
 Now, every time you run `conda activate ProjLab`, your shell will automatically change to your project directory. Next time just activate ProjLab and run 
