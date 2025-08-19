@@ -1,40 +1,3 @@
----
-
-## 🏃 Optional: Auto-change directory on environment activation
-
-You can configure your Conda environment so that when you activate it, your shell automatically changes to your project folder:
-
-1. Find your environment folder by running:
-   ```powershell
-   conda info --envs
-   ```
-   Look for the path next to your environment name (e.g., `ProjLab`).
-
-2. Create a folder named `activate.d` inside your environment's `ProjLab\etc\conda` directory:
-   ```powershell
-   mkdir "<env_path>\etc\conda\activate.d"
-   ```
-
-3. Create a file named `auto_cd.bat` in that folder with the following content:
-   ```bat
-   cd /d <PATH/TO/YOUR/ProjLab>
-   ```
-4. For Windows users, you may need to make another file named `auto_cd.ps1` in the same folder  with the following content:
-   ```ps1
-   Set-Location -Path 'C:\Users\hamed\OneDrive\projects\ProjLab'
-   ```
-
-Now, every time you run `conda activate ProjLab`, your shell will automatically change to your project directory. Next time just activate ProjLab and run 
-   ```powershell
-      python init_proj.py
-   ```
-
-# ProjLab
-**ProjLab** is a Python-based command-line tool for quickly scaffolding new projects with a consistent structure, optional GitHub integration, and Conda environment setup.  
-It’s designed for developers, data scientists, and researchers who often switch between **temporary**, **proof-of-concept (PoC)**, and **production** projects.
-
----
-
 ## ✨ Features
 
 - 📂 **Automatic folder structure** (`data/`, `results/`, `notebooks/`, `related-files/`, and optional `repo/`)
@@ -131,6 +94,44 @@ You will be prompted for:
 * Make sure this file is **not committed to Git** by adding `.env` to `.gitignore` (already added).
 
 ---
+
+---
+
+## 🏃 Optional: Auto-change directory on environment activation
+
+You can configure your Conda environment so that when you activate it, your shell automatically changes to your project folder:
+
+1. Find your environment folder by running:
+   ```powershell
+   conda info --envs
+   ```
+   Look for the path next to your environment name (e.g., `ProjLab`).
+
+2. Create a folder named `activate.d` inside your environment's `ProjLab\etc\conda` directory:
+   ```powershell
+   mkdir "<env_path>\etc\conda\activate.d"
+   ```
+
+3. Create a file named `auto_cd.bat` in that folder with the following content:
+   ```bat
+   cd /d <PATH/TO/YOUR/ProjLab>
+   ```
+4. For Windows users, you may need to make another file named `auto_cd.ps1` in the same folder  with the following content:
+   ```ps1
+   Set-Location -Path 'C:\Users\hamed\OneDrive\projects\ProjLab'
+   ```
+
+Now, every time you run `conda activate ProjLab`, your shell will automatically change to your project directory. Next time just activate ProjLab and run 
+   ```powershell
+      python init_proj.py
+   ```
+
+# ProjLab
+**ProjLab** is a Python-based command-line tool for quickly scaffolding new projects with a consistent structure, optional GitHub integration, and Conda environment setup.  
+It’s designed for developers, data scientists, and researchers who often switch between **temporary**, **proof-of-concept (PoC)**, and **production** projects.
+
+---
+
 
 ## 🛠 Example Session
 
