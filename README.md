@@ -128,16 +128,10 @@ You can configure your Conda environment so that when you activate it, your shel
    Set-Location -Path 'PATH/TO/YOUR/ProjLab'
    ```
 
-Now, every time you run `conda activate ProjLab`, your shell will automatically change to your project directory. Next time just activate ProjLab and run 
+Now, every time you run `conda activate ProjLab`, your shell will automatically change to your ProjLab directory. Next time just activate ProjLab and run 
    ```powershell
       python init_proj.py
    ```
-
-# ProjLab
-**ProjLab** is a Python-based command-line tool for quickly scaffolding new projects with a consistent structure, optional GitHub integration, and Conda environment setup.  
-It’s designed for developers, data scientists, and researchers who often switch between **temporary**, **proof-of-concept (PoC)**, and **production** projects.
-
----
 
 
 ## 🛠 Example Session
