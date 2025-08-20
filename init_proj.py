@@ -5,7 +5,7 @@ import questionary
 from github import Github
 import shutil
 import subprocess
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote
 
 load_dotenv()
 
@@ -96,32 +96,51 @@ def parse_github_https_url(url: str):
     owner, repo = path_parts
     return owner, repo
 
+def build_pat_https_url(owner: str, repo_name: str) -> str:
+    """
+    Build an HTTPS remote that uses a PAT for authentication.
+    Username can be your real GitHub username; the PAT is used as password.
+    """
+    token = os.getenv("GITHUB_PAT_TOKEN")
+    user  = os.getenv("GITHUB_USERNAME") or "x-access-token"  # either works
+    if not token:
+        raise RuntimeError("GITHUB_TOKEN is missing (cannot clone private repos via HTTPS).")
+    # URL-encode the token to be safe with special characters
+    token_q = quote(token, safe="")
+    return f"https://{user}:{token_q}@github.com/{owner}/{repo_name}.git"
+
 def clone_and_setup_repo(repo_url, target_path, env_name, fallback_path):
     """
-    owner: 'your-user-or-org'
-    repo_name: 'my-repo'
-    target_path: path where the repo folder should be created (must not exist)
+    repo_url: HTTPS URL the user pasted (e.g., https://github.com/owner/repo.git)
+    target_path: directory to clone into (must not exist)
     """
     owner, repo_name = parse_github_https_url(repo_url)
-    # SSH via your alias (best for multi-account)
+
+    # Prefer SSH if configured, else HTTPS+PAT
     ssh_host = os.getenv("SSH_HOST")  # e.g., github-biz or github-personal
-    if not ssh_host:
-        print("SSH_HOST not set in env; trying with HTTPS ...")
-        # HTTPS (uses Git Credential Manager to prompt/cache PAT)
-        remote_url = f"https://github.com/{owner}/{repo_name}.git"
-    else:
+    if ssh_host:
         remote_url = f"git@{ssh_host}:{owner}/{repo_name}.git"
-        
+        try:
+            subprocess.run(["git", "clone", remote_url, str(target_path)], check=True)
+            print(f"✅ Repo cloned to {target_path}")
+            return
+        except subprocess.CalledProcessError as e:
+            print(f"⚠️ SSH clone failed: {e}. Falling back to HTTPS + PAT ...")
+
+    # HTTPS + PAT fallback (or primary if no SSH_HOST)
     try:
-        subprocess.run(["git", "clone", remote_url, str(target_path)], check=True)
+        pat_url = build_pat_https_url(owner, repo_name)
+        print(f"🔗 Cloning (HTTPS+PAT) {owner}/{repo_name} -> {target_path}")
+        # IMPORTANT: don't print pat_url; it contains the secret
+        subprocess.run(["git", "clone", pat_url, str(target_path)], check=True)
         print(f"✅ Repo cloned to {target_path}")
     except subprocess.CalledProcessError as e:
-        print(f"❌ Failed to clone the repo: {e}")
-        return
-
+        print("❌ Failed to clone the repo over HTTPS+PAT.")
+        print("   - Check that GITHUB_USERNAME and GITHUB_TOKEN are set for the correct account.")
+        print("   - Ensure the PAT has access to this repo (and is authorized for the org if applicable / SSO).")
+        raise
     env_yml_path = os.path.join(target_path, "environment.yml")
     handle_env_creation(env_yml_path, env_name, fallback_path)
-
 
 def handle_env_creation(env_yml_path, env_name, fallback_path):
     if os.path.exists(env_yml_path):
