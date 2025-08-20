@@ -5,6 +5,7 @@ import questionary
 from github import Github
 import shutil
 import subprocess
+from urllib.parse import urlparse
 
 load_dotenv()
 
@@ -71,9 +72,49 @@ def initialize_git_repo(path, remote_url):
     os.system("git branch -M main")
     os.system("git push -u origin main")
 
+def parse_github_https_url(url: str):
+    """
+    Parse a GitHub HTTPS repo URL and return (owner, repo_name).
+
+    Examples:
+        https://github.com/owner/repo.git  -> ("owner", "repo")
+        https://github.com/org/project     -> ("org", "project")
+    """
+    # First strip trailing ".git" if present
+    if url.endswith(".git"):
+        url = url[:-4]
+
+    # Validate and parse
+    parsed = urlparse(url)
+    if parsed.netloc not in ("github.com", "www.github.com"):
+        raise ValueError(f"Not a valid GitHub HTTPS URL: {url}")
+
+    path_parts = parsed.path.strip("/").split("/")
+    if len(path_parts) != 2:
+        raise ValueError(f"Unexpected GitHub path format: {parsed.path}")
+
+    owner, repo = path_parts
+    return owner, repo
+
 def clone_and_setup_repo(repo_url, target_path, env_name, fallback_path):
+    """
+    owner: 'your-user-or-org'
+    repo_name: 'my-repo'
+    target_path: path where the repo folder should be created (must not exist)
+    """
+    owner, repo_name = parse_github_https_url(repo_url)
+    # SSH via your alias (best for multi-account)
+    ssh_host = os.getenv("SSH_HOST")  # e.g., github-biz or github-personal
+    if not ssh_host:
+        print("SSH_HOST not set in env; trying with HTTPS ...")
+        # HTTPS (uses Git Credential Manager to prompt/cache PAT)
+        remote_url = f"https://github.com/{owner}/{repo_name}.git"
+    else:
+        remote_url = f"git@{ssh_host}:{owner}/{repo_name}.git"
+        
     try:
-        subprocess.run(["git", "clone", repo_url, str(target_path)], check=True)
+        print(f"🔗 Cloning {owner}/{repo_name} -> {target_path}")
+        subprocess.run(["git", "clone", remote_url, str(target_path)], check=True)
         print(f"✅ Repo cloned to {target_path}")
     except subprocess.CalledProcessError as e:
         print(f"❌ Failed to clone the repo: {e}")
