@@ -131,7 +131,6 @@ def clone_and_setup_repo(repo_url, target_path, env_name, fallback_path):
     try:
         pat_url = build_pat_https_url(owner, repo_name)
         print(f"🔗 Cloning (HTTPS+PAT) {owner}/{repo_name} -> {target_path}")
-        # IMPORTANT: don't print pat_url; it contains the secret
         subprocess.run(["git", "clone", pat_url, str(target_path)], check=True)
         print(f"✅ Repo cloned to {target_path}")
     except subprocess.CalledProcessError as e:
