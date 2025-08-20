@@ -12,6 +12,8 @@ GITHUB_USERNAME = os.getenv("GITHUB_USERNAME")
 GITHUB_PAT_TOKEN = os.getenv("GITHUB_PAT_TOKEN")
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
+if not GITHUB_PAT_TOKEN:
+        raise RuntimeError("GITHUB_PAT_TOKEN missing. Did you load the correct .env?")
 
 
 def create_structure(project_name, project_type):
@@ -37,6 +39,7 @@ def create_structure(project_name, project_type):
 def create_github_repo(repo_name):
     g = Github(GITHUB_PAT_TOKEN)
     user = g.get_user()
+    print(user)
     try:
         repo = user.get_repo(repo_name)
         print(f"⚠️ Repo '{repo_name}' already exists. Using existing repo.")
