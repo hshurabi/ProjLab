@@ -113,7 +113,6 @@ def clone_and_setup_repo(repo_url, target_path, env_name, fallback_path):
         remote_url = f"git@{ssh_host}:{owner}/{repo_name}.git"
         
     try:
-        print(f"🔗 Cloning {owner}/{repo_name} -> {target_path}")
         subprocess.run(["git", "clone", remote_url, str(target_path)], check=True)
         print(f"✅ Repo cloned to {target_path}")
     except subprocess.CalledProcessError as e:
