@@ -26,7 +26,6 @@ def create_structure(project_name, project_type):
     os.makedirs(os.path.join(project_path, "notebooks"), exist_ok=True)
     os.makedirs(os.path.join(project_path, "related-files"), exist_ok=True)
 
-
     # Copy sample data and notebook template
     templates_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "templates")
     source_file = os.path.join(templates_path, "get_started.ipynb")
