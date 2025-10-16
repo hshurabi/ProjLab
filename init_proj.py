@@ -171,6 +171,9 @@ def main():
             repo_url = create_github_repo(project_name)
             initialize_git_repo(project_path, repo_url)
             clone_and_setup_repo(repo_url, repo_subdir, project_name, project_path)
+            if questionary.confirm("Do you want to create a new Conda environment for this project?").ask():
+                env_name = questionary.text("Environment name:", default=project_name).ask()
+                create_conda_env(env_name, project_path)
         else:
             # If no GitHub repo at all, still optionally create env
             if questionary.confirm("Do you want to create a new Conda environment for this project?").ask():
