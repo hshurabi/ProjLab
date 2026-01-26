@@ -66,7 +66,8 @@ PROJECT_ROOT/
         ├── notebooks/
         │   └── get_started.ipynb
         ├── related-files/
-        └── repo/         # cloned GitHub repo (if chosen)
+        ├── repo/         # cloned GitHub repo (if chosen)
+        └── environment.yml # if a new environment is created.
 ```
 
 ---
@@ -154,6 +155,10 @@ Now, every time you run `conda activate ProjLab`, your shell will automatically 
 * Use `tmp` for scratch or throwaway work
 * Store Data files in `data/`, write the results to `results/`, and store related-files (e.g., papers and presentations) in `related-files/` to avoid commiting them to git.
 * Run `conda env export --no-builds > environment.yml` inside a project to save its dependencies for reproducibility
+* Once new packages installed, make sure to update the environment.yml file in the root directory of the project
+  ```powershell
+   conda env update --file environment.yml --prune
+   ```
 
 ---
 
