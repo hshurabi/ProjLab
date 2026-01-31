@@ -45,7 +45,7 @@ def create_github_repo(repo_name):
         print(f"⚠️ Repo '{repo_name}' already exists. Using existing repo.")
     except:
         # Repo doesn't exist; safe to create
-        repo = user.create_repo(repo_name)
+        repo = user.create_repo(repo_name, private=True, description="Project created by ProjLab")
         print(f"✅ Created new repo '{repo_name}'")
     return repo.clone_url
 
