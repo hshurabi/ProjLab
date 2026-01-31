@@ -162,18 +162,18 @@ Now, every time you run `conda activate ProjLab`, your shell will automatically 
   # Multi-account usage:
   1. Recommended to clone ProjLab to different root directory.
   2. Change .gitconfig based on directory
-      ```gitconfig
+```gitconfig
 [includeIf "gitdir:<dir/to/account1/root>"]
     path = ~/.gitconfig-account1
 [includeIf "gitdir:<dir/to/account2/root>"]
     path = ~/.gitconfig-account2
-      ```
+```
   4. Make two new gitconfig files with above names
+```gitconfig
   [user]
 	email = <account1_email>
 	name = <account1_user_name>
-     
----
+```
 
 ## 📜 License
 
