@@ -33,7 +33,7 @@ It’s designed for developers, data scientists, and researchers who often switc
 
 1. **Clone this repo** (or download):
 ```bash
-   git clone https://github.com/<your-username>/ProjLab.git
+   git clone https://github.com/hshurabi/ProjLab.git
    cd ProjLab
 ```
 
